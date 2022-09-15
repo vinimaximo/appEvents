@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { promise } from 'protractor';
 import { PostService } from 'src/services/post.service';
 
 @Component({
@@ -60,6 +59,28 @@ constructor(
     this.router.navigate(['mostar-usuario/'+id+'/'+nome+'/'+usuario+'/'+nivel]);
 }
   ativar(id, ativo){
-
+    if(ativo=='1'){
+      return new Promise(()=>{
+        let dados = {
+          requisicao:'excluir',
+          id: id,
+        };
+        this.service.dadosApi(dados, "usuarios.php").subscribe(data=>{
+          this.ionViewWillEnter();
+        })
+      });
+    }
+    else {
+      return new Promise(()=>{
+        let dados = {
+          requisicao:'ativar',
+          id: id,
+        };
+        this.service.dadosApi(dados, "usuarios.php").subscribe(data=>{
+          this.ionViewWillEnter();
+        })
+      });
+    };
+   
 }
 }
