@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button>
+          <ion-menu-button></ion-menu-button>
+          <ion-back-button></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title >Eventos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-row class="ion-padding" style="background-color: rgb(51, 70, 247)">
+  <ion-input
+    placeholder="Buscar"
+    [(ngModel)]="nome"
+    type="search"
+    (input)="carregar()"
+    required
+  ></ion-input>
+  <ion-buttons (click)="carregar()">
+    <ion-button>
+      <ion-icon slot="end" name="search"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-row>
+
+<ion-content>
+<ion-list>
+  <ion-item-sliding *ngFor="let even of eventos">
+    
+     
+    
+      <ion-item-options side="start">
+        
+      </ion-item-options>
+      <!-- <ion-item><ion-label *ngIf="even.ativo==1" color="tertiary">{{even}}</ion-label></ion-item> -->
+   
+  </ion-item-sliding>
+</ion-list>
+
+
+</ion-content>
