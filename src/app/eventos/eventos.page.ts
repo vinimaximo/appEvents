@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { PostService } from 'src/services/post.service';
 
 @Component({
@@ -13,7 +15,9 @@ export class EventosPage implements OnInit {
   inicial: number = 0;
   eventos: any = null;// define uma matriz vazia  
   constructor(
-    private service: PostService
+    private service: PostService,
+    private router: Router,
+    private alertCtr: AlertController
   ) { }
 
   ngOnInit() {
@@ -24,6 +28,9 @@ export class EventosPage implements OnInit {
     this.eventos = [];
     this.inicial = 0;
     this.carregar();
+  }
+  addEventos() {
+    this.router.navigate(['add-eventos']);
   }
 
   carregar() {
@@ -50,5 +57,54 @@ export class EventosPage implements OnInit {
       });
     });
   }//fim do metodo carregar
+  editar(id, nome, data, capacidade, usuarios_id) {
+    this.router.navigate(['add-eventos/' + id + '/' + nome + '/' + data + '/' + capacidade + '/' + usuarios_id]);
+  }
+  mostrar(id, nome, data, capacidade) {
+    this.router.navigate(['mostrar-eventos/' + id + '/' + nome + '/' + data + '/' + capacidade]);
+  }
+  ativar(id, ativo) {
+    if (ativo == '1') {
+      return new Promise(() => {
+        let dados = {
+          requisicao: 'excloi',
+          id: id,
+        };
+        this.service.dadosApi(dados, "eventos.php").subscribe(data => {
+          this.ionViewWillEnter();
+        })
+      });
+    }
+    else {
+      return new Promise(() => {
+        let dados = {
+          requisicao: 'ativ',
+          id: id,
+        };
+        this.service.dadosApi(dados, "eventos.php").subscribe(data => {
+          this.ionViewWillEnter();
+        })
+      });
+    };
+
+  }
+  async alertaexclusao(id, usuario) {
+    const alert = await this.alertCtr.create({
+      header: 'Confirmação de Exclusão do Evento ' + usuario,
+      buttons: [{
+        text: 'Cancelar', role: 'Cancel', cssClass: 'light',
+        handler: () => {
+          //Ação caso o usuario clique em cancelar
+        }
+      }, {
+        text: 'ok',
+        handler: () => {
+          this.ativar(id, 1);
+        }
+
+      }]
+    });
+    alert.present();
+  }
 
 }
