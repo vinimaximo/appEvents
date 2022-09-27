@@ -39,7 +39,7 @@ export class UsuariosPage implements OnInit {
         limit: this.limite,
         start: this.inicial
       };
-      this.service.dadosApi(dados, 'usuarios.php').subscribe(data => {
+      this.service.dadosApi(dados, 'api_usuario.php').subscribe(data => {
 
         if (data['result'] == '0') {
           this.ionViewWillEnter();
@@ -67,7 +67,7 @@ export class UsuariosPage implements OnInit {
           requisicao: 'excluir',
           id: id,
         };
-        this.service.dadosApi(dados, "usuarios.php").subscribe(data => {
+        this.service.dadosApi(dados, "api_usuario.php").subscribe(data => {
           this.ionViewWillEnter();
         })
       });
@@ -78,7 +78,7 @@ export class UsuariosPage implements OnInit {
           requisicao: 'ativar',
           id: id,
         };
-        this.service.dadosApi(dados, "usuarios.php").subscribe(data => {
+        this.service.dadosApi(dados, "api_usuario.php").subscribe(data => {
           this.ionViewWillEnter();
         })
       });

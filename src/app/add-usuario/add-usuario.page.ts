@@ -36,10 +36,12 @@ export class AddUsuarioPage implements OnInit {
       nome:this.nome,
       usuario:this.usuario,
       senha:this.senha,
-      nivel:this.nivel
+      nivel:this.nivel,
+      avatar: 'semfoto.png'
     }
     //console.log(dados);
-    this.service.dadosApi(dados, "usuarios.php").subscribe(data=>{
+    this.service.dadosApi(dados, "api_usuario.php").subscribe(data=>{
+     // console.log(data);
       if(data['success']){
         this.router.navigate(['usuarios']);
         this.id=null;this.nome="";this.usuario="";this.senha="";this.nivel="";
@@ -56,9 +58,10 @@ export class AddUsuarioPage implements OnInit {
         usuario:this.usuario,
         senha:this.senha,
         nivel:this.nivel,
+        avatar: 'semfoto.png',
         id:this.id
       };
-      this.service.dadosApi(dados,"usuarios.php").subscribe(data=>{
+      this.service.dadosApi(dados,"api_usuario.php").subscribe(data=>{
         if(data['success']){
           this.router.navigate(['usuarios']);
         }
