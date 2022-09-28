@@ -61,6 +61,7 @@ export class AddUsuarioPage implements OnInit {
         avatar: 'semfoto.png',
         id:this.id
       };
+      console.log(dados);
       this.service.dadosApi(dados,"api_usuario.php").subscribe(data=>{
         if(data['success']){
           this.router.navigate(['usuarios']);

@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class MostrarEventosPage implements OnInit {
   id:number;
   nome:string='';
-  data:string='';
+  data_evento:string='';
   capacidade:string=''
     constructor(
      private actRoute: ActivatedRoute
@@ -19,7 +19,7 @@ export class MostrarEventosPage implements OnInit {
       this.actRoute.params.subscribe((veionarota:any)=>{
         this.id = veionarota.id;
         this.nome = veionarota.nome;
-        this.data = veionarota.data;
+        this.data_evento = veionarota.data;
         this.capacidade = veionarota.capacidade;
       });
     }

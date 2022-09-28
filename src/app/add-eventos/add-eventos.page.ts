@@ -10,7 +10,7 @@ import { PostService } from 'src/services/post.service';
 export class AddEventosPage implements OnInit {
   id: number;
   nome:string ="";
-  data:string  ="";
+  data_evento:string  ="";
   capacidade:string  ="";
   usuarios_id:number = null;
   constructor(private service: PostService ,
@@ -20,9 +20,10 @@ export class AddEventosPage implements OnInit {
 
   ngOnInit() {
     this.actRoute.params.subscribe((dadosdarota:any)=>{
+      console.log(dadosdarota)
       this.id = dadosdarota.id;
       this.nome = dadosdarota.nome;
-      this.data = dadosdarota.data;
+      this.data_evento = dadosdarota.data_evento;
       this.capacidade = dadosdarota.capacidade;
       this.usuarios_id = dadosdarota.usuarios_id;
     });
@@ -32,17 +33,18 @@ export class AddEventosPage implements OnInit {
      let dados = {
        requisicao:'adicionar',
        nome:this.nome,
-       data:this.data,
+       data_evento:this.data_evento,
        ativo:1,
        capacidade:this.capacidade,
-       usuarios_id:this.usuarios_id
+       usuarios_id:this.usuarios_id,
+       avatar: 'semfoto.png'
      }
-     //console.log(dados);
-     this.service.dadosApi(dados, "eventos.php").subscribe(data=>{
-      console.log(data);
-       if(data['success']){
+     console.log(dados);
+     this.service.dadosApi(dados, "eventos_api.php").subscribe(data_evento=>{
+      console.log(data_evento);
+       if(data_evento['success']){
         this.router.navigate(['eventos']);
-         this.id=null;this.nome="";this.data="";this.capacidade="";this.usuarios_id=null;
+         this.id=null;this.nome="";this.data_evento="";this.capacidade="";this.usuarios_id=null;
        }
      });
     });
@@ -52,13 +54,15 @@ export class AddEventosPage implements OnInit {
       let dados = {
         requisicao:'edit',
         nome: this.nome,
-        data:this.data,
+        data_evento:this.data_evento,
         capacidade:this.capacidade,   
         usuarios_id:this.usuarios_id,
-        id:this.id
+        id:this.id,
+        avatar: 'semfoto.png'
       };
-      this.service.dadosApi(dados,"eventos.php").subscribe(data=>{
-        if(data['success']){
+      console.log(dados);
+      this.service.dadosApi(dados,"eventos_api.php").subscribe(data_evento=>{
+        if(data_evento['success']){
           this.router.navigate(['eventos']);
         }
       });

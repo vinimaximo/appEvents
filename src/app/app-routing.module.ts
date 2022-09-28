@@ -36,7 +36,7 @@ const routes: Routes = [
     loadChildren: () => import('./eventos/eventos.module').then( m => m.EventosPageModule)
   },
   {
-    path: 'mostrar-eventos/:id/:nome/:data/:capacidade',
+    path: 'mostrar-eventos/:id/:nome/:data_evento/:capacidade/:usuarios_id',
     loadChildren: () => import('./mostrar-eventos/mostrar-eventos.module').then( m => m.MostrarEventosPageModule)
   },
   {
@@ -44,7 +44,7 @@ const routes: Routes = [
     loadChildren: () => import('./add-eventos/add-eventos.module').then( m => m.AddEventosPageModule)
   },
   {
-    path: 'add-eventos/:id/:nome/:data/:capacidade/:usuarios_id',
+    path: 'add-eventos/:id/:nome/:data_evento/:capacidade/:usuarios_id',
     loadChildren: () => import('./add-eventos/add-eventos.module').then( m => m.AddEventosPageModule)
   }
 ];

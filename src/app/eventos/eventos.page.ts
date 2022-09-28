@@ -43,25 +43,26 @@ export class EventosPage implements OnInit {
         limit: this.limite,
         start: this.inicial
       };
-      this.service.dadosApi(dados, 'eventos.php').subscribe(data => {
+      this.service.dadosApi(dados, 'eventos_api.php').subscribe(data_evento => {
 
-        if (data['result'] == '0') {
+        if (data_evento['result'] == '0') {
           this.ionViewWillEnter();
         } else {
-          for (let eventos of data['result']) {
+          for (let eventos of data_evento['result']) {
             this.eventos.push(eventos);
           }
         }
-        console.log(data['result'][0]);
+        
 
       });
     });
   }//fim do metodo carregar
-  editar(id, nome, data, capacidade, usuarios_id) {
-    this.router.navigate(['add-eventos/' + id + '/' + nome + '/' + data + '/' + capacidade + '/' + usuarios_id]);
+  editar(id, nome, data_evento, capacidade, usuarios_id) {
+    console.log(usuarios_id)
+    this.router.navigate(['add-eventos/' + id + '/' + nome + '/' + data_evento + '/' + capacidade + '/' + usuarios_id]);
   }
-  mostrar(id, nome, data, capacidade) {
-    this.router.navigate(['mostrar-eventos/' + id + '/' + nome + '/' + data + '/' + capacidade]);
+  mostrar(id, nome, data_evento, capacidade, usuarios_id) {
+    this.router.navigate(['mostrar-eventos/' + id + '/' + nome + '/' + data_evento + '/' + capacidade + '/' + usuarios_id]);
   }
   ativar(id, ativo) {
     if (ativo == '1') {
@@ -70,7 +71,7 @@ export class EventosPage implements OnInit {
           requisicao: 'excloi',
           id: id,
         };
-        this.service.dadosApi(dados, "eventos.php").subscribe(data => {
+        this.service.dadosApi(dados, "eventos_api.php").subscribe(data_evento => {
           this.ionViewWillEnter();
         })
       });
@@ -81,7 +82,7 @@ export class EventosPage implements OnInit {
           requisicao: 'ativ',
           id: id,
         };
-        this.service.dadosApi(dados, "eventos.php").subscribe(data => {
+        this.service.dadosApi(dados, "eventos_api.php").subscribe(data_evento => {
           this.ionViewWillEnter();
         })
       });
